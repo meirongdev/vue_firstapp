@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onBeforeMount, onMounted,
   onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted,
-  customRef, defineProps} from 'vue';
+  customRef, defineProps, defineEmits} from 'vue';
 
 console.log("setup: The component is created in memory");
 
@@ -9,12 +9,15 @@ let timer = ref(null);
 const maxCount = 10;
 
 // 声明init和end两个 attributes
-const props = defineProps(["limits"]);
+const props = defineProps(["limits", "index"]);
 const init = props.limits.init || 0;
 const end = props.limits.end || 0;
+const index = props.index || 1;
 
 // const count = ref(0);
 const count = ref(parseInt(init));
+
+const emit = defineEmits(["incr"]);
 
 function decrement() {
     count.value--;
@@ -29,6 +32,8 @@ const doubleCount = computed(() => count.value * 2);
 const increment = () => {
   if (!end || count.value < parseInt(end)) {
     count.value++;
+    // 发送事件
+    emit("incr", 1);
   } else {
     stop();
   }
@@ -132,7 +137,7 @@ export default {
 </script> -->
 
 <template>
-  <h1>MyCounter Component</h1>
+  <h1>MyCounter Component - {{ index }}</h1>
   <p class="fc"> First Component </p>
   Reactive variable count: {{ count }} 
   <br>
