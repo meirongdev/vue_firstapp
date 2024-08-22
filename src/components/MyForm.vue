@@ -12,7 +12,7 @@
 <template>
   <form>
     <label for="name">Name:</label>
-    <input type="text" id="name" v-model="name" />
+    <input type="text" id="name" v-model.lazy="name" />
     <label for="birthYear">Birth Year:</label>
     <select id="birthYear" v-model="birthYear">
       <option v-for="date in dates" :key="date" :value="date">{{ date }}</option>
