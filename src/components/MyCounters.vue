@@ -12,5 +12,5 @@ const increment = (value) => {
 
 <template>
   <MyCounter v-for="i in nb" :key="i" :limits="{init:10, end:20}" :index="i" @incr="increment"/>
-  <p>Total for count: {{ total }}</p>
+  <p>Total increased for count: {{ total }}</p>
 </template>

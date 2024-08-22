@@ -1,7 +1,7 @@
 <script setup>
 import { ref, computed, onBeforeMount, onMounted,
   onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted,
-  customRef, defineProps, defineEmits} from 'vue';
+  customRef, defineProps, defineEmits, inject} from 'vue';
 
 console.log("setup: The component is created in memory");
 
@@ -19,6 +19,8 @@ const count = ref(parseInt(init));
 
 const emit = defineEmits(["incr"]);
 
+const total = inject('app.total');
+
 function decrement() {
     count.value--;
 
@@ -34,6 +36,7 @@ const increment = () => {
     count.value++;
     // 发送事件
     emit("incr", 1);
+    total.value++;
   } else {
     stop();
   }
