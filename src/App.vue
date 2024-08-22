@@ -1,5 +1,5 @@
 <template>
-  <MyCounter init=10 end=20 />
+  <MyCounter :limits="{init:10, end:20}"/>
 </template>
 
 <script>

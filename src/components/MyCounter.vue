@@ -9,9 +9,9 @@ let timer;
 const maxCount = 10;
 
 // 声明init和end两个 attributes
-const props = defineProps(["init", "end"]);
-const init = props.init || 0;
-const end = props.end || 0;
+const props = defineProps(["limits"]);
+const init = props.limits.init || 0;
+const end = props.limits.end || 0;
 
 // const count = ref(0);
 const count = ref(parseInt(init));
