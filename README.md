@@ -1,5 +1,7 @@
 # firstapp
 
+simple app for vue.js 3.
+
 ## Project setup
 ```
 pnpm install
