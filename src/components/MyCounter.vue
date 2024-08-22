@@ -5,7 +5,7 @@ import { ref, computed, onBeforeMount, onMounted,
 
 console.log("setup: The component is created in memory");
 
-let timer;
+let timer = ref(null);
 const maxCount = 10;
 
 // 声明init和end两个 attributes
@@ -35,13 +35,14 @@ const increment = () => {
 };
 
 const start = () => {
-  timer = setInterval(() => {
+  timer.value = setInterval(() => {
   increment();  
   }, 1000);
 };
 
 const stop= () => {
-  clearInterval(timer);
+  clearInterval(timer.value);
+  timer.value = null;
 };
 
 // Lifecycle hooks
@@ -138,6 +139,14 @@ export default {
   <hr>
   Custom Ref count3: {{ count3 }}
   <button @click="incrementCount3">Increment</button>
+  <hr>
+  Input: <input type="text" v-bind:value="count" />
+  Input for count (using v-model): <input type="text" v-model="count" />
+  <hr>
+  <!-- <button v-if="!timer" @click="start()">Start</button>
+  <button v-else @click="stop()">Stop</button> -->
+  <button v-show="!timer" @click="start()">Start</button>
+  <button v-show="timer" @click="stop()">Stop</button>
 </template>
 
 <style scoped>

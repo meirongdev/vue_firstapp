@@ -1,14 +1,14 @@
 <template>
-  <MyCounter :limits="{init:10, end:20}"/>
+  <MyCounters :nb="3"/>
 </template>
 
-<script>
-import MyCounter from './components/MyCounter.vue'
+<script >
+import MyCounters from './components/MyCounters.vue'
 
 export default {
   name: 'App',
   components: {
-    MyCounter: MyCounter
+    MyCounters: MyCounters
   }
 }
 </script>
