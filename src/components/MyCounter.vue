@@ -114,6 +114,16 @@ const count3 = useMaximum(5);
 const incrementCount3 = () => {
   count3.value++;
 }
+
+const verifyKey = () => {
+  const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+  const moves = ["Backspace", "ArrowLeft", "ArrowRight", "Delete", "Tab", "Home", "End"];
+  let authorized;
+  authorized = [...numbers, ...moves];
+  if (!authorized.includes(event.key)) {
+    event.preventDefault();
+  }
+}
 </script>
 <!-- <script>
 export default {
@@ -147,6 +157,10 @@ export default {
   <button v-else @click="stop()">Stop</button> -->
   <button v-show="!timer" @click="start()">Start</button>
   <button v-show="timer" @click="stop()">Stop</button>
+  <hr>
+  Reactive variable count: <input type="text" v-model="count" @keydown="verifyKey" />
+  <br>
+  Enterd value: {{ count }}
 </template>
 
 <style scoped>
