@@ -1,15 +1,24 @@
 <script setup>
 import { ref, computed, onBeforeMount, onMounted,
   onBeforeUpdate, onUpdated, onBeforeUnmount, onUnmounted,
-  customRef} from 'vue';
+  customRef, defineProps} from 'vue';
 
 console.log("setup: The component is created in memory");
+
 let timer;
 const maxCount = 10;
 
-const count = ref(0);
+// 声明init和end两个 attributes
+const props = defineProps(["init", "end"]);
+const init = props.init || 0;
+const end = props.end || 0;
+
+// const count = ref(0);
+const count = ref(parseInt(init));
+
 function decrement() {
-  count.value--;
+    count.value--;
+
 }
 const clickMe = () => {
   alert('You clicked me!');
@@ -17,9 +26,17 @@ const clickMe = () => {
 
 const doubleCount = computed(() => count.value * 2);
 
+const increment = () => {
+  if (!end || count.value < parseInt(end)) {
+    count.value++;
+  } else {
+    stop();
+  }
+};
+
 const start = () => {
   timer = setInterval(() => {
-    count.value++;
+  increment();  
   }, 1000);
 };
 
@@ -106,7 +123,10 @@ export default {
 <template>
   <h1>MyCounter Component</h1>
   <p class="fc"> First Component </p>
-  Reactive variable count: {{ count }}
+  Reactive variable count: {{ count }} 
+  <br>
+  init: {{ init }} => end: {{ end }}
+  <br>
   <button @click="count++">Increment</button>
   <button @click="decrement()">Decrement</button>
   <button @click="clickMe()">Click Me</button>

@@ -1,5 +1,5 @@
 <template>
-  <MyCounter />
+  <MyCounter init=10 end=20 />
 </template>
 
 <script>
